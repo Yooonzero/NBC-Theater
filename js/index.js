@@ -1,4 +1,3 @@
-import { clickLi } from "./modal.js";
 import scroll from "./scroll.js";
 import { search } from "./search.js";
 import template from "./template.js";
@@ -35,11 +34,17 @@ const fetchMovie = async () => {
 
     if (event.target.matches(".card")) {
       alert(`영화 id: ${event.target.id}`);
-      // window.location.href="detail.html"
+      event.target.id;
+      localStorage.setItem("movieId", JSON.stringify(event.target.id));
+      window.location.href = "detail.html";
     } else {
       // 카드의 자식 태그 (img, h3, p) 클릭 시 부모의 id로 접근
       alert(`영화 id: ${event.target.parentNode.id}`);
-      // window.location.href="detail.html"
+      localStorage.setItem(
+        "movieId",
+        JSON.stringify(event.target.parentNode.id)
+      );
+      window.location.href = "detail.html";
     }
 
     //누를 때 local에 저장하고 detail.html로 이동
