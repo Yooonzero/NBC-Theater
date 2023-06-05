@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>상세페이지</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-    <script>
-        const movieId = JSON.parse(localStorage.getItem("movieId"))
-        console.log(movieId)
-    </script>
+    <script src="js/detail.js" type="module"></script>
 </head>
 <body>
     <header>
@@ -25,13 +22,17 @@
                 <p>줄거리 : </p>
                 <p>평점 : </p>
             </div>
-            <form>
+            <div>
                 <div>
-                    <input type="text" placeholder="이름을 입력하세요."/>
-                    <input type="password" placeholder="비밀번호를 입력하세요."/>
+                    <label>작성자</label>
+                    <input id="name" type="text" placeholder="이름을 입력하세요."/>
+                    <label>비밀번호</label> <input id="password" type="password" placeholder="비밀번호를 입력하세요."/>
+                    <label>내용</label>
+                    <textarea id="contents" cols="50" rows="5"></textarea>
+                    <button id="comment-btn">댓글 작성하기</button>
                 </div>
-                <textarea cols="50" rows="5"></textarea>
-            </form>    
+                
+            </div>    
             <ul id="comment">
                 <li>재밌네요!</li>
                 <li>재밌어요!</li>
