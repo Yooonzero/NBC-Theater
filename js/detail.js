@@ -8,6 +8,29 @@ const passwordInput = document.querySelector("#password");
 const contentsInput = document.querySelector("#contents");
 const commentBtn = document.querySelector("#comment-btn");
 
+const getReviewData = function () {
+  const reviewData = JSON.parse(localStorage.getItem(`comment${movieId}`));
+  return reviewData;
+};
+
+const getReview = function () {
+  const data = getReviewData();
+  if (!data) return;
+  const comment = document.querySelector("#comment");
+  comment.innerHTML = data
+    .map((review) => {
+      let { writer, contents } = review;
+      if (!writer) writer = "이름이 없습니다.";
+      if (!contents) contents = "내용이 없습니다.";
+      return `<li class="review">
+                <p>${writer}</p>
+                <p>${contents}</p>
+              </li>`;
+    })
+    .join("");
+};
+getReview();
+
 commentBtn.addEventListener("click", function () {
   if (
     nameInput.value === "" ||
