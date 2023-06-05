@@ -26,10 +26,4 @@ export const search = async function () {
   let joinTemp = temp.join("");
   const nowPlayEl = document.querySelector("#now-play");
   nowPlayEl.innerHTML = joinTemp;
-
-  //검색된 데이터로 만든 템플릿의 lis 재할당
-  movieLis = document.querySelectorAll("#now-play li");
-
-  // 모달 클릭 데이터삽입 함수 1. rows 2. lis, modal el 선택자, modal내부 div el 선택자
-  clickLi(searchRows, movieLis, modalEl, modalContentEl);
 };

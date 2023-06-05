@@ -12,6 +12,7 @@ export default function scroll() {
             `https://api.themoviedb.org/3/movie/now_playing?api_key=1609961e6087bc908a47717d3912b94c&page=${pageCount}&language=ko-KR`
           );
           const data = await res.json();
+
           let rows = data.results;
 
           // template.js로 템플릿 제작 순회
