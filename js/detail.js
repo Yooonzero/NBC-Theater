@@ -31,7 +31,7 @@ const getReview = function () {
       if (!contents) contents = "내용이 없습니다.";
       return `<li class="review" data-number="${index}">
                 <p class="comment-contents">${contents}</p>
-                <p class="commnet-writer">작성자: ${writer}</p>
+                <p class="comment-writer">작성자: ${writer}</p>
                 <div>
                   <button class="update">수정하기</button>
                   <button class="delete">삭제하기</button>
