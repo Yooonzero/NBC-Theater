@@ -27,3 +27,5 @@ export const search = async function () {
   const nowPlayEl = document.querySelector("#now-play");
   nowPlayEl.innerHTML = joinTemp;
 };
+
+// 안녕하세요
