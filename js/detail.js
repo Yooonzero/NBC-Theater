@@ -87,13 +87,10 @@ const getReview = function () {
     });
   });
   const deleteBtns = document.querySelectorAll(".delete");
-  const userComment = JSON.parse(localStorage.getItem("movieId"));
   console.log(deleteBtns);
   deleteBtns.forEach((deleteBtn, index) => {
     deleteBtn.addEventListener("click", function () {
       const deletedData = data.toSpliced(index, 1);
-      // console.log(deletedData);
-      // console.log([...deletedData]);
       const deletedArr = JSON.stringify([...deletedData]);
       localStorage.setItem(`comment${movieId}`, deletedArr);
       window.location.reload();
