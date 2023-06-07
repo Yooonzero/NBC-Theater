@@ -34,7 +34,7 @@ const getReview = function () {
                 <p class="commnet-writer">작성자: ${writer}</p>
                 <div>
                   <button class="update">수정하기</button>
-                  <button class="delete">삭제하기</button>
+                  <button onclick="deleteComment()" class="delete">삭제하기</button>
                 <div>
               </li>`;
     })

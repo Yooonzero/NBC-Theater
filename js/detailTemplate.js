@@ -3,7 +3,7 @@ export const detailTemplate = async (movieId) => {
     `https://api.themoviedb.org/3/movie/${movieId}?api_key=1609961e6087bc908a47717d3912b94c&language=ko-KR`
   );
   const data = await res.json();
-  console.log(data);
+  // console.log(data);
 
   const detailTemplate = `
       <h2 class="title" >${data.title}</h2>
