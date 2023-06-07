@@ -19,6 +19,7 @@ const getReviewData = function () {
   const reviewData = JSON.parse(localStorage.getItem(`comment${movieId}`));
   return reviewData;
 };
+let data = getReviewData();
 
 const getReview = function () {
   const data = getReviewData();
@@ -39,6 +40,52 @@ const getReview = function () {
               </li>`;
     })
     .join("");
+  const updateBtns = document.querySelectorAll(".update");
+
+  updateBtns.forEach((updateBtn, index) => {
+    updateBtn.addEventListener("click", function () {
+      const passwordPrompt = prompt("비밀번호를 입력해주세요");
+      console.log(passwordPrompt);
+      console.log(data);
+      console.log(data[index].password);
+      if (passwordPrompt !== data[index].password) {
+        return alert("비밀번호가 다릅니다.");
+      }
+      // console.log(this.parentNode.parentNode);
+      const li = this.parentNode.parentNode;
+      li.innerHTML = `
+        <input class="update-writer${index}" type="text" />
+        <textarea class="update-contents${index}"  placeholder="리뷰내용을 입력하세요."></textarea>
+        <button class="update-submit-btn${index}">수정제출하기</button>
+      `;
+      const updateSubmitBtn = document.querySelector(
+        `.update-submit-btn${index}`
+      );
+      const updateWriter = document.querySelector(`.update-writer${index}`);
+      const updateContents = document.querySelector(`.update-contents${index}`);
+      updateSubmitBtn.addEventListener("click", function () {
+        console.log(updateWriter.value);
+        console.log(updateContents.value);
+        console.log(data);
+        data[index] = {
+          ...data[index],
+          writer: updateWriter.value,
+          contents: updateContents.value,
+        };
+        localStorage.setItem(`comment${movieId}`, JSON.stringify(data));
+        const updateTemp = `
+                  <p class="comment-contents">${updateContents.value}</p>
+                  <p class="commnet-writer">작성자: ${updateWriter.value}</p>
+                  <div>
+                    <button class="update">수정하기</button>
+                    <button class="delete">삭제하기</button>
+                  <div>
+                  `;
+        li.innerHTML = updateTemp;
+        // window.location.reload();
+      });
+    });
+  });
 };
 getReview();
 
