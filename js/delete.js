@@ -1,8 +1,8 @@
 // 1. 해당영화의 상세페이지에있는 local storage에서 데이터를 userComment 변수에 할당.
 const userComment = JSON.parse(localStorage.getItem("comment447277"));
-console.log(document.querySelector("#comment"));
-console.log(userComment);
-console.log(userComment[`${index}`]);
+// console.log(document.querySelector("#comment"));
+// console.log(userComment);
+// console.log(userComment[`${index}`]);
 
 // 2. 값을 할당한 userComment에 toSpliced메서드를 넣어준다.
 // console.log(userComment.toSpliced(0, 1));
@@ -17,17 +17,3 @@ console.log(userComment[`${index}`]);
 
 // 4. 삭제한 데이터를 다시 로컬저장소에 set해준다.
 // data-nember 에 있는 데이터를 지워주고 붙여주면 되나 ?
-function deleteComment() {
-  //   const userComment = JSON.parse(localStorage.getItem("comment447277"));
-  console.log(
-    userComment[0]
-  ) // const arr = JSON.stringify([...newUserComment]) // const newUserComment = userComment.toSpliced(0, 1)
-  `<li class="review" data-number="${index}">
-        <p class="comment-contents">${contents}</p>
-        <p class="commnet-writer">작성자: ${writer}</p>
-        <div>
-            <button class="update">수정하기</button>
-            <button onclick="deleteComment()" class="delete">삭제하기</button>
-        <div>
-    </li>`;
-}

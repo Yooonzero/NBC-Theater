@@ -2,7 +2,7 @@ import { detailTemplate } from "./detailTemplate.js";
 
 //메인페이지에서 받아온 id값 불러오기
 const movieId = JSON.parse(localStorage.getItem("movieId"));
-console.log(movieId);
+// console.log(movieId);
 
 setTimeout(function () {
   // 바로 localStorage에서 받아오는 것이 비동기가 안되어 있기 때문에 안나오는 경우가 가끔있어서 setTimeout을 사용
@@ -35,7 +35,7 @@ const getReview = function () {
                 <p class="commnet-writer">작성자: ${writer}</p>
                 <div>
                   <button class="update">수정하기</button>
-                  <button onclick="deleteComment()" class="delete">삭제하기</button>
+                  <button class="delete">삭제하기</button>
                 <div>
               </li>`;
     })
@@ -44,18 +44,18 @@ const getReview = function () {
 
   updateBtns.forEach((updateBtn, index) => {
     updateBtn.addEventListener("click", function () {
-      const passwordPrompt = prompt("비밀번호를 입력해주세요");
-      console.log(passwordPrompt);
-      console.log(data);
-      console.log(data[index].password);
-      if (passwordPrompt !== data[index].password) {
-        return alert("비밀번호가 다릅니다.");
-      }
+      // const passwordPrompt = prompt("비밀번호를 입력해주세요");
+      // console.log(passwordPrompt);
+      // console.log(data);
+      // console.log(data[index].password);
+      // if (passwordPrompt !== data[index].password) {
+      //   return alert("비밀번호가 다릅니다.");
+      // }
       // console.log(this.parentNode.parentNode);
       const li = this.parentNode.parentNode;
       li.innerHTML = `
         <input class="update-writer${index}" type="text" />
-        <textarea class="update-contents${index}"  placeholder="리뷰내용을 입력하세요."></textarea>
+        <textarea class="update-contents${index}" placeholder="리뷰내용을 입력하세요."></textarea>
         <button class="update-submit-btn${index}">수정제출하기</button>
       `;
       const updateSubmitBtn = document.querySelector(
@@ -84,6 +84,19 @@ const getReview = function () {
         li.innerHTML = updateTemp;
         // window.location.reload();
       });
+    });
+  });
+  const deleteBtns = document.querySelectorAll(".delete");
+  const userComment = JSON.parse(localStorage.getItem("movieId"));
+  console.log(deleteBtns);
+  deleteBtns.forEach((deleteBtn, index) => {
+    deleteBtn.addEventListener("click", function () {
+      const deletedData = data.toSpliced(index, 1);
+      // console.log(deletedData);
+      // console.log([...deletedData]);
+      const deletedArr = JSON.stringify([...deletedData]);
+      localStorage.setItem(`comment${movieId}`, deletedArr);
+      window.location.reload();
     });
   });
 };
