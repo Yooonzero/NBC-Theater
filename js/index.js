@@ -14,7 +14,7 @@ const fetchMovie = async () => {
   );
   const data = await res.json();
   rows = data.results;
-
+  console.log(rows);
   // template.js로 템플릿 제작 순회
   let temp = template(rows);
 

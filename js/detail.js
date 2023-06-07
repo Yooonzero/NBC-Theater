@@ -1,6 +1,13 @@
+import { detailTemplate } from "./detailTemplate.js";
+
 //메인페이지에서 받아온 id값 불러오기
 const movieId = JSON.parse(localStorage.getItem("movieId"));
 console.log(movieId);
+
+setTimeout(function () {
+  // 바로 localStorage에서 받아오는 것이 비동기가 안되어 있기 때문에 안나오는 경우가 가끔있어서 setTimeout을 사용
+  detailTemplate(movieId);
+}, 100);
 
 //input 값들 불러오기
 const nameInput = document.querySelector("#name");
@@ -18,13 +25,17 @@ const getReview = function () {
   if (!data) return;
   const comment = document.querySelector("#comment");
   comment.innerHTML = data
-    .map((review) => {
+    .map((review, index) => {
       let { writer, contents } = review;
       if (!writer) writer = "이름이 없습니다.";
       if (!contents) contents = "내용이 없습니다.";
-      return `<li class="review">
-                <p>${writer}</p>
-                <p>${contents}</p>
+      return `<li class="review" data-number="${index}">
+                <p class="comment-contnets">${contents}</p>
+                <p class="commnet-writer">작성자: ${writer}</p>
+                <div>
+                  <button class="updata">수정하기</button>
+                  <button class="delete">삭제하기</button>
+                <div>
               </li>`;
     })
     .join("");
