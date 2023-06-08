@@ -1,3 +1,4 @@
+import deleteComment from "./deleteComment.js";
 import { detailTemplate } from "./detailTemplate.js";
 import update from "./update.js";
 
@@ -54,6 +55,7 @@ commentEl.addEventListener("click", function (e) {
     update({ e, data, movieId });
   } else if (e.target.classList.contains("delete")) {
     //delete 로직
+    deleteComment({ e, data, movieId });
   }
 });
 
