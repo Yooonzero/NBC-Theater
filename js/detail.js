@@ -2,7 +2,7 @@ import deleteComment from "./comment/deleteComment.js";
 import { detailTemplate } from "./template/detailTemplate.js";
 import getComment from "./comment/getComment.js";
 import { getData } from "./getData.js";
-import postCommnet from "./comment/postComment.js";
+import postComment from "./comment/postComment.js";
 import update from "./comment/updateComment.js";
 
 //메인페이지에서 받아온 id값 불러오기
@@ -32,4 +32,4 @@ commentEl.addEventListener("click", function (e) {
 
 // 댓글 POST 클릭이벤트
 const commentBtn = document.querySelector("#comment-btn");
-commentBtn.addEventListener("click", postCommnet);
+commentBtn.addEventListener("click", postComment);
