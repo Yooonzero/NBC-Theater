@@ -1,4 +1,5 @@
 import { detailTemplate } from "./detailTemplate.js";
+import update from "./update.js";
 
 //메인페이지에서 받아온 id값 불러오기
 const movieId = JSON.parse(localStorage.getItem("movieId"));
@@ -39,55 +40,22 @@ const getReview = function () {
                 <div>
               </li>`;
     })
+    .reverse()
     .join("");
-  const updateBtns = document.querySelectorAll(".update");
-
-  updateBtns.forEach((updateBtn, index) => {
-    updateBtn.addEventListener("click", function () {
-      const passwordPrompt = prompt("비밀번호를 입력해주세요");
-      console.log(passwordPrompt);
-      console.log(data);
-      console.log(data[index].password);
-      if (passwordPrompt !== data[index].password) {
-        return alert("비밀번호가 다릅니다.");
-      }
-      // console.log(this.parentNode.parentNode);
-      const li = this.parentNode.parentNode;
-      li.innerHTML = `
-        <input class="update-writer${index}" type="text" />
-        <textarea class="update-contents${index}"  placeholder="리뷰내용을 입력하세요."></textarea>
-        <button class="update-submit-btn${index}">수정제출하기</button>
-      `;
-      const updateSubmitBtn = document.querySelector(
-        `.update-submit-btn${index}`
-      );
-      const updateWriter = document.querySelector(`.update-writer${index}`);
-      const updateContents = document.querySelector(`.update-contents${index}`);
-      updateSubmitBtn.addEventListener("click", function () {
-        console.log(updateWriter.value);
-        console.log(updateContents.value);
-        console.log(data);
-        data[index] = {
-          ...data[index],
-          writer: updateWriter.value,
-          contents: updateContents.value,
-        };
-        localStorage.setItem(`comment${movieId}`, JSON.stringify(data));
-        const updateTemp = `
-                  <p class="comment-contents">${updateContents.value}</p>
-                  <p class="commnet-writer">작성자: ${updateWriter.value}</p>
-                  <div>
-                    <button class="update">수정하기</button>
-                    <button class="delete">삭제하기</button>
-                  <div>
-                  `;
-        li.innerHTML = updateTemp;
-        // window.location.reload();
-      });
-    });
-  });
 };
+
 getReview();
+
+const commentEl = document.querySelector("#comment");
+commentEl.addEventListener("click", function (e) {
+  console.log(e.target.classList.contains("update"));
+  if (e.target.classList.contains("update")) {
+    //update 로직
+    update({ e, data, movieId });
+  } else if (e.target.classList.contains("delete")) {
+    //delete 로직
+  }
+});
 
 commentBtn.addEventListener("click", function () {
   if (
