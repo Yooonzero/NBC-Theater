@@ -1,4 +1,8 @@
-export default function update({ e, data, movieId }) {
+import getComment from "./getComment.js";
+import { getData } from "../getData.js";
+
+export default function update({ e, movieId }) {
+  const data = getData(movieId);
   const index = e.target.parentNode.parentNode.getAttribute("data-number");
   const passwordPrompt = prompt("비밀번호를 입력해주세요");
   if (passwordPrompt !== data[index].password) {
@@ -26,6 +30,7 @@ export default function update({ e, data, movieId }) {
       contents: updateContents.value,
     };
     localStorage.setItem(`comment${movieId}`, JSON.stringify(data));
-    window.location.reload();
+
+    getComment(data);
   });
 }

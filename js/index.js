@@ -1,19 +1,27 @@
-import scroll from "./scroll.js";
-import { search } from "./search.js";
-import template from "./template.js";
+import movieMap from "./map.js";
+import scroll from "./utils/scroll.js";
+import { search } from "./utils/search.js";
+import template from "./template/mainTemplate.js";
 
 //start input focus
 const searchInputEl = document.getElementById("search-input");
 window.addEventListener("load", () => {
   searchInputEl.focus();
 });
-let rows;
+
+navigator.geolocation.getCurrentPosition((pos) => {
+  console.log(pos);
+  let latitude = pos.coords.latitude;
+  let longitude = pos.coords.longitude;
+  movieMap({ latitude, longitude });
+});
+
 const fetchMovie = async () => {
   const res = await fetch(
     "https://api.themoviedb.org/3/movie/now_playing?api_key=1609961e6087bc908a47717d3912b94c&language=ko-KR"
   );
   const data = await res.json();
-  rows = data.results;
+  let rows = data.results;
   console.log(rows);
   // template.js로 템플릿 제작 순회
   let temp = template(rows);

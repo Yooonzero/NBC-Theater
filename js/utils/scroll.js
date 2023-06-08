@@ -1,4 +1,4 @@
-import template from "./template.js";
+import template from "../template/mainTemplate.js";
 //무한스크롤
 export default function scroll() {
   let LastLi = document.querySelector("#now-play li:last-child");
