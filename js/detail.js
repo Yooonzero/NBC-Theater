@@ -1,4 +1,5 @@
 import { detailTemplate } from "./detailTemplate.js";
+import update from "./update.js";
 
 //메인페이지에서 받아온 id값 불러오기
 const movieId = JSON.parse(localStorage.getItem("movieId"));
@@ -19,6 +20,7 @@ const getReviewData = function () {
   const reviewData = JSON.parse(localStorage.getItem(`comment${movieId}`));
   return reviewData;
 };
+let data = getReviewData();
 
 const getReview = function () {
   const data = getReviewData();
@@ -38,9 +40,22 @@ const getReview = function () {
                 <div>
               </li>`;
     })
+    .reverse()
     .join("");
 };
+
 getReview();
+
+const commentEl = document.querySelector("#comment");
+commentEl.addEventListener("click", function (e) {
+  console.log(e.target.classList.contains("update"));
+  if (e.target.classList.contains("update")) {
+    //update 로직
+    update({ e, data, movieId });
+  } else if (e.target.classList.contains("delete")) {
+    //delete 로직
+  }
+});
 
 commentBtn.addEventListener("click", function () {
   if (
