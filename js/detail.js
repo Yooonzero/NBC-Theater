@@ -33,4 +33,4 @@ commentEl.addEventListener("click", function (e) {
 
 // 댓글 POST 클릭이벤트 postCommnet.js
 const commentBtn = document.querySelector("#comment-btn");
-commentBtn.addEventListener("click", postCommnet);
+commentBtn.addEventListener("click", postComment);
