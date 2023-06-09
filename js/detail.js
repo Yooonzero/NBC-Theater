@@ -1,94 +1,37 @@
-import deleteComment from "./deleteComment.js";
-import { detailTemplate } from "./detailTemplate.js";
-import update from "./update.js";
+import deleteComment from "./comment/deleteComment.js";
+import { detailTemplate } from "./template/detailTemplate.js";
+
+import update from "./comment/updateComment.js";
+import commentTemplate from "./template/commentTemplate.js";
+import { getComment } from "./comment/getComment.js";
+import postComment from "./comment/postComment.js";
 
 //메인페이지에서 받아온 id값 불러오기
 const movieId = JSON.parse(localStorage.getItem("movieId"));
-console.log(movieId);
 
 setTimeout(function () {
   // 바로 localStorage에서 받아오는 것이 비동기가 안되어 있기 때문에 안나오는 경우가 가끔있어서 setTimeout을 사용
   detailTemplate(movieId);
 }, 100);
 
-//input 값들 불러오기
-const nameInput = document.querySelector("#name");
-const passwordInput = document.querySelector("#password");
-const contentsInput = document.querySelector("#contents");
-const commentBtn = document.querySelector("#comment-btn");
+// data값 가져오기
+const data = getComment(movieId);
 
-const getReviewData = function () {
-  const reviewData = JSON.parse(localStorage.getItem(`comment${movieId}`));
-  return reviewData;
-};
-let data = getReviewData();
-
-const getReview = function () {
-  const data = getReviewData();
-  if (!data) return;
-  const comment = document.querySelector("#comment");
-  comment.innerHTML = data
-    .map((review, index) => {
-      let { writer, contents } = review;
-      if (!writer) writer = "이름이 없습니다.";
-      if (!contents) contents = "내용이 없습니다.";
-      return `<li class="review" data-number="${index}">
-                <p class="comment-contents">${contents}</p>
-                <p class="comment-writer">작성자: ${writer}</p>
-                <div>
-                  <button class="update">수정하기</button>
-                  <button class="delete">삭제하기</button>
-                <div>
-              </li>`;
-    })
-    .reverse()
-    .join("");
-};
-
-getReview();
+// 초기 댓글가져오기
+commentTemplate(data);
 
 const commentEl = document.querySelector("#comment");
 commentEl.addEventListener("click", function (e) {
   console.log(e.target.classList.contains("update"));
   if (e.target.classList.contains("update")) {
-    //update 로직
-    update({ e, data, movieId });
+    //update 로직 updateCommnet.js
+    update({ e, movieId });
   } else if (e.target.classList.contains("delete")) {
-    //delete 로직
-    deleteComment({ e, data, movieId });
+    //delete 로직 deleteCommnet.js
+    deleteComment({ e, movieId });
   }
 });
 
-commentBtn.addEventListener("click", function () {
-  if (
-    nameInput.value === "" ||
-    passwordInput.value === "" ||
-    contentsInput.value === ""
-  ) {
-    return alert("내용을 입력해주세요.");
-  }
-  // console.log(`이름: ${nameInput.value}`);
-  // console.log(`비밀번호: ${passwordInput.value}`);
-  // console.log(`컨텐츠: ${contentsInput.value}`);
-  let commentArr;
-  let commentKey = `comment${movieId}`;
-  // console.log(JSON.parse(localStorage.getItem(commentKey)))
-  if (JSON.parse(localStorage.getItem(commentKey))) {
-    commentArr = JSON.parse(localStorage.getItem(commentKey));
-  } else {
-    commentArr = [];
-  }
-
-  let commentValue = {
-    writer: nameInput.value,
-    password: passwordInput.value,
-    contents: contentsInput.value,
-  };
-  commentArr.push(commentValue);
-  localStorage.setItem(commentKey, JSON.stringify(commentArr));
-
-  nameInput.value = "";
-  passwordInput.value = "";
-  contentsInput.value = "";
-  alert("댓글이 성공적으로 작성되었습니다.");
-});
+// 댓글 POST 클릭이벤트 postCommnet.js
+const commentBtn = document.querySelector("#comment-btn");
+commentBtn.addEventListener("click", postComment);

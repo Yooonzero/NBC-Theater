@@ -1,6 +1,6 @@
 //검색함수
 
-import template from "./template.js";
+import template from "../template/mainTemplate.js";
 
 export const search = async function () {
   // input value가져오기
