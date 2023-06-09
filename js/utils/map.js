@@ -5,7 +5,7 @@ export default function movieMap({ latitude, longitude }) {
   let mapContainer = document.getElementById("map"), // 지도를 표시할 div
     mapOption = {
       center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
-      radius: 3000,
+      radius: 4000,
       x: longitude,
       y: latitude,
     };
