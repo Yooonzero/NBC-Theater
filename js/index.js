@@ -1,4 +1,4 @@
-import movieMap from "./map.js";
+import movieMap from "./utils/map.js";
 import scroll from "./utils/scroll.js";
 import { search } from "./utils/search.js";
 import template from "./template/mainTemplate.js";
@@ -9,10 +9,12 @@ window.addEventListener("load", () => {
   searchInputEl.focus();
 });
 
+//좌표값 가져오기
 navigator.geolocation.getCurrentPosition((pos) => {
   console.log(pos);
   let latitude = pos.coords.latitude;
   let longitude = pos.coords.longitude;
+  //kakao api 실행함수 내 근처 영화관!!
   movieMap({ latitude, longitude });
 });
 
@@ -35,27 +37,21 @@ const fetchMovie = async () => {
   // 요소의 가시성관찰
   scroll();
 
+  //누를 때 localStorage에 id값 저장하고 detail.html로 이동
   nowPlayEl.addEventListener("click", function (event) {
-    console.log(event.target);
-    console.log(event.currentTarget);
     if (event.target === event.currentTarget) return;
-
     if (event.target.matches(".card")) {
-      alert(`영화 id: ${event.target.id}`);
       event.target.id;
       localStorage.setItem("movieId", JSON.stringify(event.target.id));
       window.location.href = "detail.html";
     } else {
       // 카드의 자식 태그 (img, h3, p) 클릭 시 부모의 id로 접근
-      alert(`영화 id: ${event.target.parentNode.id}`);
       localStorage.setItem(
         "movieId",
         JSON.stringify(event.target.parentNode.id)
       );
       window.location.href = "detail.html";
     }
-
-    //누를 때 local에 저장하고 detail.html로 이동
   });
 
   //검색함수
@@ -69,7 +65,6 @@ const fetchMovie = async () => {
   searchInputEl.addEventListener("keydown", (e) => {
     if (e.keyCode === 13) search();
   });
-
-  // 로컬스토리지에 data 넣기
 };
+
 fetchMovie();

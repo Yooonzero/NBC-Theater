@@ -1,4 +1,4 @@
-import getComment from "./getComment.js";
+import commentTemplate from "../template/commentTemplate.js";
 
 export default function postCommnet() {
   const nameInput = document.querySelector("#name");
@@ -37,5 +37,5 @@ export default function postCommnet() {
   passwordInput.value = "";
   contentsInput.value = "";
 
-  getComment(data);
+  commentTemplate(data);
 }

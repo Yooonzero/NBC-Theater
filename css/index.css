@@ -1,10 +1,43 @@
-* {
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
 body {
+    font-family: 'Noto Sans KR', sans-serif;
     background-color: #ABDEE6;
     color: #333;
+}
+
+header {
+
+    background-color: #ccc;
+    padding: 30px 0;
+}
+
+header h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+header a {
+    text-decoration: none;
+    color: #333;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 40px auto 0;
+}
+
+.map-wrap {
+    padding: 40px;
+    background: #F6EAC2;
+    border-radius: 20px;
+    margin: 0 20px;
+}
+
+.map-wrap h3 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
 }
 
 .search-container {
@@ -51,14 +84,14 @@ body {
 #now-play {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     gap: 40px;
     margin-bottom: 50px;
 }
 
 #now-play li {
     list-style: none;
-    max-width: 500px;
+    max-width: 450px;
     overflow: hidden;
     cursor: pointer;
     padding: 40px;
@@ -93,7 +126,7 @@ body {
     font-weight: bold;
 }
 
-@media (max-width:1054px) {
+@media (max-width:1115px) {
     .search-container {
         flex-direction: column;
         gap: 16px;

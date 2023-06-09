@@ -1,9 +1,9 @@
 import deleteComment from "./comment/deleteComment.js";
 import { detailTemplate } from "./template/detailTemplate.js";
-import getComment from "./comment/getComment.js";
-import { getData } from "./getData.js";
 import postCommnet from "./comment/postComment.js";
 import update from "./comment/updateComment.js";
+import commentTemplate from "./template/commentTemplate.js";
+import { getComment } from "./comment/getComment.js";
 
 //메인페이지에서 받아온 id값 불러오기
 const movieId = JSON.parse(localStorage.getItem("movieId"));
@@ -13,23 +13,24 @@ setTimeout(function () {
   detailTemplate(movieId);
 }, 100);
 
-//input 값들 불러오기
-const data = getData(movieId);
+// data값 가져오기
+const data = getComment(movieId);
 
-getComment(data);
+// 초기 댓글가져오기
+commentTemplate(data);
 
 const commentEl = document.querySelector("#comment");
 commentEl.addEventListener("click", function (e) {
   console.log(e.target.classList.contains("update"));
   if (e.target.classList.contains("update")) {
-    //update 로직
+    //update 로직 updateCommnet.js
     update({ e, movieId });
   } else if (e.target.classList.contains("delete")) {
-    //delete 로직
+    //delete 로직 deleteCommnet.js
     deleteComment({ e, movieId });
   }
 });
 
-// 댓글 POST 클릭이벤트
+// 댓글 POST 클릭이벤트 postCommnet.js
 const commentBtn = document.querySelector("#comment-btn");
 commentBtn.addEventListener("click", postCommnet);
