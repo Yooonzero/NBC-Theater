@@ -14,6 +14,7 @@ navigator.geolocation.getCurrentPosition((pos) => {
   console.log(pos);
   let latitude = pos.coords.latitude;
   let longitude = pos.coords.longitude;
+  console.log(latitude);
   //kakao api 실행함수 내 근처 영화관!!
   movieMap({ latitude, longitude });
 });

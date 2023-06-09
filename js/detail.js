@@ -1,9 +1,10 @@
 import deleteComment from "./comment/deleteComment.js";
 import { detailTemplate } from "./template/detailTemplate.js";
-import postCommnet from "./comment/postComment.js";
+
 import update from "./comment/updateComment.js";
 import commentTemplate from "./template/commentTemplate.js";
 import { getComment } from "./comment/getComment.js";
+import postComment from "./comment/postComment.js";
 
 //메인페이지에서 받아온 id값 불러오기
 const movieId = JSON.parse(localStorage.getItem("movieId"));

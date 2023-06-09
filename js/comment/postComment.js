@@ -1,6 +1,6 @@
 import commentTemplate from "../template/commentTemplate.js";
 
-export default function postCommnet() {
+export default function postComment() {
   const nameInput = document.querySelector("#name");
   const passwordInput = document.querySelector("#password");
   const contentsInput = document.querySelector("#contents");
