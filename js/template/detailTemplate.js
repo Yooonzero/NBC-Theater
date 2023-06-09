@@ -1,10 +1,11 @@
 export const detailTemplate = async (movieId) => {
+  //상세페이지 영화정보 data fetch
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${movieId}?api_key=1609961e6087bc908a47717d3912b94c&language=ko-KR`
   );
   const data = await res.json();
-  console.log(data);
 
+  // 상세페이지 제작
   const detailTemplate = `
       <h2 class="title" >${data.title}</h2>
       <div>
@@ -23,5 +24,7 @@ export const detailTemplate = async (movieId) => {
       </div>
     `;
   const movieCardEl = document.querySelector("#movie-card");
+
+  // 상세페이지 삽입
   movieCardEl.innerHTML = detailTemplate;
 };
