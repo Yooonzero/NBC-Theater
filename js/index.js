@@ -11,10 +11,8 @@ window.addEventListener("load", () => {
 
 //좌표값 가져오기
 navigator.geolocation.getCurrentPosition((pos) => {
-  console.log(pos);
   let latitude = pos.coords.latitude;
   let longitude = pos.coords.longitude;
-  console.log(latitude);
   //kakao api 실행함수 내 근처 영화관!!
   movieMap({ latitude, longitude });
 });
@@ -25,7 +23,6 @@ const fetchMovie = async () => {
   );
   const data = await res.json();
   let rows = data.results;
-  console.log(rows);
   // template.js로 템플릿 제작 순회
   let temp = template(rows);
 
